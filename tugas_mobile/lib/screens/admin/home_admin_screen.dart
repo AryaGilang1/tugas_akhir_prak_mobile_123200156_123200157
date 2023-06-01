@@ -69,7 +69,7 @@ class _HomeAdminScreenState extends State<HomeAdminScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     HomeAdminComponents(),
     TodoList(),
-    ProfileScreen(),
+    Text('data'),
   ];
 
   void _onItemTapped(int index) {
@@ -141,6 +141,7 @@ class _HomeAdminScreenState extends State<HomeAdminScreen> {
                   Icon(Icons.list, size: 20),
                   Icon(Icons.person, size: 20),
                 ],
+
                 onTap: (index) {
                   setState(() {
                     _onItemTapped(index);

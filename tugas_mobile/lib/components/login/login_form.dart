@@ -81,6 +81,7 @@ class _SignInform extends State<SignInform> {
       keyboardType: TextInputType.text,
       style: mTitleStyle,
       decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(40)),
           labelText: 'Username',
           hintText: 'Masukan Username anda',
           labelStyle: TextStyle(

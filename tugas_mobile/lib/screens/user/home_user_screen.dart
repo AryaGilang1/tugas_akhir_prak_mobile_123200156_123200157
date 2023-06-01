@@ -4,11 +4,18 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:tugas_mobile/components/login/login_components.dart';
 import 'package:tugas_mobile/components/register/register_components.dart';
+import 'package:tugas_mobile/screens/admin/crud/detail_product_screen.dart';
+import 'package:tugas_mobile/screens/api/screens/chuck_noris.dart';
+import 'package:tugas_mobile/screens/jam/jam_screen.dart';
+import 'package:tugas_mobile/screens/login/login_screens.dart';
+import 'package:tugas_mobile/screens/profile/profile_screen.dart';
+import 'package:tugas_mobile/screens/user/home_user.dart';
 import 'package:tugas_mobile/size-config.dart';
 import 'package:dio/dio.dart';
 import '../../api/configAPI.dart';
 import '../../utils/constants.dart';
 import '../admin/home_admin_screen.dart';
+import '../exchange/currency_dropdown.dart';
 
 class HomeUserScreen extends StatefulWidget {
   static String routeName = '/home-screen';
@@ -18,104 +25,78 @@ class HomeUserScreen extends StatefulWidget {
 }
 
 class _HomeUserScreenState extends State<HomeUserScreen> {
-  Response? response;
-  var dio = Dio();
-  var dataGitar;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getDataGitar();
+  int _selectedIndex = 0;
+
+  static List<Widget> _widgetOptions = <Widget>[
+    HomeUser(),
+    CurrencyExchangePage(),
+    JamScreen(),
+    // ProfileScreen()
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(),
+                  ));
+            },
+            icon: Icon(Icons.person)),
+        automaticallyImplyLeading: false,
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChuckNorrisJokePage(),
+                    ));
+              },
+              child: Text(
+                'Bored?',
+                style: TextStyle(color: Colors.black),
+              ))
+        ],
         title: Text('Gitar Rock & Roll'),
       ),
-      body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: getProportionateScreenHeight(20),
-            ),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return cardDataGitar(dataGitar[index]);
-                      },
-                      itemCount: dataGitar == null ? 0 : dataGitar.length,
-                      shrinkWrap: true,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+      body: Column(
+        children: [
+          _widgetOptions.elementAt(_selectedIndex),
+        ],
       ),
-    );
-  }
-
-  Widget cardDataGitar(data) {
-    return Card(
-      elevation: 10,
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
-        child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          leading: Container(
-            padding: EdgeInsets.only(right: 10),
-            decoration: BoxDecoration(
-              border: Border(
-                right: BorderSide(
-                  width: 1,
-                  color: Colors.grey,
-                ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        // fixedColor: Colors.red,
+        // unselectedItemColor: Colors.black,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.shop,
               ),
-            ),
-            child: Image.network('$baseUrl/${data['gambar']}'),
-          ),
-          title: Text('${data['nama']}',
-              style: TextStyle(
-                  color: mTitleColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13)),
-          trailing: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.keyboard_arrow_right_outlined)),
-        ),
+              label: 'home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.attach_money_rounded), label: 'currency'),
+          BottomNavigationBarItem(icon: Icon(Icons.lock_clock), label: 'waktu'),
+        ],
       ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil(
+                context, LoginScreen.routeName, (route) => false);
+          },
+          child: Icon(Icons.logout)),
     );
-  }
-
-  void getDataGitar() async {
-    bool status;
-    var msg;
-    try {
-      response = await dio.get(getAllGitar);
-
-      status = response!.data['sukses'];
-      msg = response!.data['msg'];
-      if (status == true) {
-        setState(() {
-          dataGitar = response!.data['data'];
-        });
-        // print(dataGitar);
-      }
-    } catch (e) {
-      print(e);
-    }
   }
 }

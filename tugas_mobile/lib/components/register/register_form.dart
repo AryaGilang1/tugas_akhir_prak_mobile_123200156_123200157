@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:tugas_mobile/api/configAPI.dart';
@@ -159,6 +160,8 @@ class _SignUpform extends State<SignUpform> {
   void prosesRegistrasi(nama, userName, email, password) async {
     bool status;
     var msg;
+    var dataUSer;
+
     try {
       response = await dio.post(urlRegister, data: {
         'nama': nama,
@@ -170,7 +173,18 @@ class _SignUpform extends State<SignUpform> {
       msg = response?.data['msg'];
       if (status == true) {
         print('sukses');
-        Navigator.pushNamed(context, LoginScreen.routeName);
+        print('sukses');
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.success,
+          animType: AnimType.rightSlide,
+          title: 'Registrasi Sukses',
+          btnCancelOnPress: () {},
+          btnOkOnPress: () {
+            dataUSer = response!.data['data'];
+            Navigator.pushNamed(context, LoginScreen.routeName);
+          },
+        ).show();
       } else {
         print('gagal');
       }

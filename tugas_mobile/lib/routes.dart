@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_mobile/components/admin/home_admin_components.dart';
+import 'package:tugas_mobile/screens/admin/crud/detail_product_screen.dart';
 import 'package:tugas_mobile/screens/admin/crud/input_gitar_screen.dart';
 import 'package:tugas_mobile/screens/admin/home_admin_screen.dart';
 import 'package:tugas_mobile/screens/admin/todo_list.dart';
@@ -14,4 +15,5 @@ final Map<String, WidgetBuilder> routes = {
   HomeAdminScreen.routeName: (context) => HomeAdminScreen(),
   InputGitarScreen.routeName: (context) => InputGitarScreen(),
   TodoList.routeName: (context) => TodoList(),
+  DetailProductScreen.routeName: (context) => DetailProductScreen(),
 };

@@ -23,26 +23,19 @@ class DialogBox extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // get user input
             TextField(
               controller: controller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: "Add a new task",
+                hintText: "Masukkan Task",
               ),
             ),
-
-            // buttons -> save + cancel
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                // save button
-                MyButton(text: "Save", onPressed: onSave),
-
+                MyButton(text: "Simpan", onPressed: onSave),
                 const SizedBox(width: 8),
-
-                // cancel button
-                MyButton(text: "Cancel", onPressed: onCancel),
+                MyButton(text: "Kembali", onPressed: onCancel),
               ],
             ),
           ],

@@ -15,40 +15,68 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-      child: Center(
-        child: Column(
-          children: [
-            Container(
-              height: 150,
-              width: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(200),
-                image: DecorationImage(
-                  image: AssetImage('assets/images/naruto.webp'),
-                  fit: BoxFit.cover,
+    return Scaffold(
+        appBar: AppBar(),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          child: Center(
+            child: Column(
+              children: [
+                Container(
+                  height: 150,
+                  width: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(200),
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/chucknorris.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-              ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Nama : Arya Gilang Ramdan',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'NIM : 123200156',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text('Kesan : menyenangkan dan membanggakan'),
+                Text('Pesan : semoga sehat selalu'),
+                SizedBox(
+                  height: 20,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: Text("Pusat bantuan"),
+                    ),
+                    Divider(
+                      thickness: 3,
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text("History"),
+                    ),
+                    Divider(
+                      thickness: 3,
+                    ),
+                  ],
+                )
+              ],
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Saran : -',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Kesan : -',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            ElevatedButton(onPressed: () {}, child: Text('data'))
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }

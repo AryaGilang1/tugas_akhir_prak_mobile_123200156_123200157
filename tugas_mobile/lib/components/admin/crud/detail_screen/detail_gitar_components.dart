@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:tugas_mobile/components/admin/crud/detail_screen/detail_gitar_form.dart';
+import 'package:tugas_mobile/components/admin/crud/input_gitar/input_gitar_form.dart';
 import 'package:tugas_mobile/components/login/login_form.dart';
 import 'package:tugas_mobile/size-config.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import 'package:tugas_mobile/utils/constants.dart';
 
-class LoginComponent extends StatefulWidget {
+class DetailGitarComponent extends StatefulWidget {
   @override
-  _LoginComponent createState() => _LoginComponent();
+  _DetailGitarComponent createState() => _DetailGitarComponent();
 }
 
-class _LoginComponent extends State<LoginComponent> {
+class _DetailGitarComponent extends State<DetailGitarComponent> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,18 +25,7 @@ class _LoginComponent extends State<LoginComponent> {
             child: Column(
               children: [
                 SizedBox(
-                  height: SizeConfig.screenHeight * 0.08,
-                ),
-                SimpleShadow(
-                  child: Image.asset(
-                    'assets/images/logo.jpeg',
-                    height: 150,
-                    width: 202,
-                  ),
-                  opacity: 0.5,
-                  color: kSecondaryColor,
-                  offset: Offset(5, 5),
-                  sigma: 2,
+                  height: SizeConfig.screenHeight * 0.04,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 10),
@@ -42,7 +33,7 @@ class _LoginComponent extends State<LoginComponent> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Login',
+                        'Detail data gitar',
                         style: mTitleStyle,
                       ),
                     ],
@@ -51,7 +42,7 @@ class _LoginComponent extends State<LoginComponent> {
                 SizedBox(
                   height: 20,
                 ),
-                SignInform(),
+                DetailGitar(),
               ],
             ),
           ),

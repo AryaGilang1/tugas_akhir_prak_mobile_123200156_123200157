@@ -58,54 +58,52 @@ class _HomeAdminComponents extends State<HomeAdminComponents> {
   }
 
   Widget cardDataGitar(data) {
-    return Card(
-      elevation: 10,
+    return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
-        child: ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            leading: Container(
-              padding: EdgeInsets.only(right: 10),
-              decoration: BoxDecoration(
-                border: Border(
-                  right: BorderSide(
-                    width: 1,
-                    color: Colors.grey,
-                  ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: Colors.amber,
+      ),
+      child: ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          leading: Container(
+            padding: EdgeInsets.only(right: 10),
+            decoration: BoxDecoration(
+              border: Border(
+                right: BorderSide(
+                  width: 1,
+                  color: Colors.grey,
                 ),
               ),
-              child: Image.network('$baseUrl/${data['gambar']}'),
             ),
-            title: Text('${data['nama']}',
-                style: TextStyle(
-                    color: mTitleColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13)),
-            trailing: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.keyboard_arrow_right_outlined)),
-            subtitle: GestureDetector(
-              onTap: () {
-                AwesomeDialog(
-                  context: context,
-                  dialogType: DialogType.warning,
-                  animType: AnimType.rightSlide,
-                  title: 'peringatan',
-                  desc: 'yakin hapus ${data['nama']}?',
-                  btnCancelOnPress: () {},
-                  btnOkOnPress: () {
-                    deleteGitar('${data['_id']}');
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, HomeAdminScreen.routeName, (route) => false);
-                  },
-                ).show();
-              },
-              child: Text('delete'),
-            )),
-      ),
+            child: Image.network('$baseUrl/${data['gambar']}'),
+          ),
+          title: Text('${data['nama']}',
+              style: TextStyle(
+                  color: mTitleColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13)),
+          trailing: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.keyboard_arrow_right_outlined)),
+          subtitle: GestureDetector(
+            onTap: () {
+              AwesomeDialog(
+                context: context,
+                dialogType: DialogType.warning,
+                animType: AnimType.rightSlide,
+                title: 'peringatan',
+                desc: 'yakin hapus ${data['nama']}?',
+                btnCancelOnPress: () {},
+                btnOkOnPress: () {
+                  deleteGitar('${data['_id']}');
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, HomeAdminScreen.routeName, (route) => false);
+                },
+              ).show();
+            },
+            child: Text('delete'),
+          )),
     );
   }
 
